@@ -175,9 +175,9 @@ class _CleanUserFormState extends State<CleanUserForm> {
   }
 
   void showSuccessMessage() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('User saved!')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('User saved!')));
   }
 
   @override
@@ -232,10 +232,7 @@ class _CleanUserFormState extends State<CleanUserForm> {
   }
 
   Widget _buildErrorMessage() {
-    return Text(
-      _errorMessage!,
-      style: const TextStyle(color: Colors.red),
-    );
+    return Text(_errorMessage!, style: const TextStyle(color: Colors.red));
   }
 
   Widget _buildSubmitButton() {

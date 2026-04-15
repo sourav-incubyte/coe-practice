@@ -80,15 +80,17 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                   Wrap(
                     spacing: 8,
                     children: sizes
-                        .map((size) => ChoiceChip(
-                              label: Text(size),
-                              selected: selectedSize == size,
-                              onSelected: (selected) {
-                                setState(() {
-                                  selectedSize = size;
-                                });
-                              },
-                            ))
+                        .map(
+                          (size) => ChoiceChip(
+                            label: Text(size),
+                            selected: selectedSize == size,
+                            onSelected: (selected) {
+                              setState(() {
+                                selectedSize = size;
+                              });
+                            },
+                          ),
+                        )
                         .toList(),
                   ),
                   const SizedBox(height: 16),
@@ -100,15 +102,17 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                   Wrap(
                     spacing: 8,
                     children: colors
-                        .map((color) => ChoiceChip(
-                              label: Text(color),
-                              selected: selectedColor == color,
-                              onSelected: (selected) {
-                                setState(() {
-                                  selectedColor = color;
-                                });
-                              },
-                            ))
+                        .map(
+                          (color) => ChoiceChip(
+                            label: Text(color),
+                            selected: selectedColor == color,
+                            onSelected: (selected) {
+                              setState(() {
+                                selectedColor = color;
+                              });
+                            },
+                          ),
+                        )
                         .toList(),
                   ),
                   const SizedBox(height: 16),
@@ -146,7 +150,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                               Future.delayed(const Duration(seconds: 2), () {
                                 setState(() => isLoading = false);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Added to cart!')),
+                                  const SnackBar(
+                                    content: Text('Added to cart!'),
+                                  ),
                                 );
                               });
                             },
@@ -161,15 +167,17 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
-                  ...reviews.map((review) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Text(review),
-                          ),
+                  ...reviews.map(
+                    (review) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(review),
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -215,9 +223,9 @@ class _CleanProductPageState extends State<CleanProductPage> {
     await Future.delayed(const Duration(seconds: 2));
     setState(() => isLoading = false);
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Added to cart!')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Added to cart!')));
     }
   }
 
@@ -227,10 +235,7 @@ class _CleanProductPageState extends State<CleanProductPage> {
       appBar: AppBar(
         title: Text(productName),
         actions: [
-          FavoriteButton(
-            isFavorite: isFavorite,
-            onToggle: toggleFavorite,
-          ),
+          FavoriteButton(isFavorite: isFavorite, onToggle: toggleFavorite),
         ],
       ),
       body: SingleChildScrollView(
@@ -338,10 +343,7 @@ class ProductDetails extends StatelessWidget {
             quantity: quantity,
             onQuantityChange: onQuantityChange,
           ),
-          AddToCartButton(
-            isLoading: isLoading,
-            onPressed: onAddToCart,
-          ),
+          AddToCartButton(isLoading: isLoading, onPressed: onAddToCart),
         ],
       ),
     );
@@ -361,10 +363,7 @@ class ProductTitle extends StatelessWidget {
       children: [
         Text(
           name,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -405,11 +404,13 @@ class SizeSelector extends StatelessWidget {
         Wrap(
           spacing: 8,
           children: sizes
-              .map((size) => ChoiceChip(
-                    label: Text(size),
-                    selected: selectedSize == size,
-                    onSelected: (_) => onSizeSelected(size),
-                  ))
+              .map(
+                (size) => ChoiceChip(
+                  label: Text(size),
+                  selected: selectedSize == size,
+                  onSelected: (_) => onSizeSelected(size),
+                ),
+              )
               .toList(),
         ),
         const SizedBox(height: 16),
@@ -442,11 +443,13 @@ class ColorSelector extends StatelessWidget {
         Wrap(
           spacing: 8,
           children: colors
-              .map((color) => ChoiceChip(
-                    label: Text(color),
-                    selected: selectedColor == color,
-                    onSelected: (_) => onColorSelected(color),
-                  ))
+              .map(
+                (color) => ChoiceChip(
+                  label: Text(color),
+                  selected: selectedColor == color,
+                  onSelected: (_) => onColorSelected(color),
+                ),
+              )
               .toList(),
         ),
         const SizedBox(height: 16),
@@ -541,10 +544,7 @@ class ReviewCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Text(review),
-        ),
+        child: Padding(padding: const EdgeInsets.all(8), child: Text(review)),
       ),
     );
   }

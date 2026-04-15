@@ -43,7 +43,7 @@ class UserProfilePresenter {
   static String displayUser(User user, bool isLoading, String errorMessage) {
     if (isLoading) return 'Loading...';
     if (errorMessage.isNotEmpty) return errorMessage;
-    
+
     final status = UserStatusService.calculateStatus(user);
     return 'Name: ${user.name}\nEmail: ${user.email}\nStatus: $status';
   }
@@ -60,7 +60,7 @@ class UserProfileController {
   Future<void> loadUser(String id) async {
     _isLoading = true;
     _errorMessage = '';
-    
+
     try {
       _user = await _userService.getUser(id);
     } catch (e) {

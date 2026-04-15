@@ -80,11 +80,7 @@ class BadUserWidget extends StatelessWidget {
   final int a; // User age
   final bool v; // Is verified
 
-  const BadUserWidget({
-    required this.n,
-    required this.a,
-    required this.v,
-  });
+  const BadUserWidget({required this.n, required this.a, required this.v});
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +179,11 @@ class SelfDocumentingScreen extends StatelessWidget {
             const SizedBox(height: 20),
             const Text(
               'BEFORE (needs comments):',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+              ),
             ),
             const SizedBox(height: 10),
             const Text('calculateTotal(price, quantity)'),
@@ -191,7 +191,11 @@ class SelfDocumentingScreen extends StatelessWidget {
             const SizedBox(height: 20),
             const Text(
               'AFTER (self-documenting):',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
             ),
             const SizedBox(height: 10),
             const Text('calculateTotalPrice(unitPrice, quantity)'),

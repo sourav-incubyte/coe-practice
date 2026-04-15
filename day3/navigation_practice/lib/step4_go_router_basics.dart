@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
 
 class ProfileScreen extends StatelessWidget {
   final String userId;
-  
+
   const ProfileScreen({required this.userId, super.key});
 
   @override
@@ -122,7 +122,7 @@ final goRouter = GoRouter(
       path: AppRoutes.home,
       builder: (context, state) => const HomeScreen(),
     ),
-    
+
     // Profile route with parameter
     GoRoute(
       path: '/profile/:userId',
@@ -131,13 +131,13 @@ final goRouter = GoRouter(
         return ProfileScreen(userId: userId);
       },
     ),
-    
+
     // Settings route
     GoRoute(
       path: AppRoutes.settings,
       builder: (context, state) => const SettingsScreen(),
     ),
-    
+
     // Login route
     GoRoute(
       path: AppRoutes.login,
@@ -152,10 +152,7 @@ class GoRouterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'go_router Demo',
-      routerConfig: goRouter,
-    );
+    return MaterialApp.router(title: 'go_router Demo', routerConfig: goRouter);
   }
 }
 

@@ -14,14 +14,7 @@ class W1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Text(n),
-          if (i) Text('$a'),
-        ],
-      ),
-    );
+    return Container(child: Column(children: [Text(n), if (i) Text('$a')]));
   }
 
   void m() {
@@ -63,18 +56,12 @@ class UserProfileCard extends StatelessWidget {
         children: [
           Text(
             userName,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           if (isOnline)
             Text(
               '$userAge years old',
-              style: TextStyle(
-                color: Colors.green[700],
-                fontSize: 14,
-              ),
+              style: TextStyle(color: Colors.green[700], fontSize: 14),
             ),
         ],
       ),

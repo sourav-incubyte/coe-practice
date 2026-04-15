@@ -11,9 +11,7 @@ class UserListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Users'),
-      ),
+      appBar: AppBar(title: const Text('Users')),
       body: ListView(
         children: [
           ListTile(
@@ -55,9 +53,7 @@ class ProductListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Products'),
-      ),
+      appBar: AppBar(title: const Text('Products')),
       body: ListView(
         children: [
           ListTile(
@@ -107,10 +103,7 @@ class ListItemTile extends StatelessWidget {
       leading: leading,
       title: Text(title),
       subtitle: Text(subtitle),
-      trailing: IconButton(
-        icon: const Icon(Icons.edit),
-        onPressed: onEdit,
-      ),
+      trailing: IconButton(icon: const Icon(Icons.edit), onPressed: onEdit),
     );
   }
 }
@@ -146,9 +139,7 @@ class GenericListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
+      appBar: AppBar(title: Text(title)),
       body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {
@@ -178,7 +169,9 @@ class ListUtils {
     }).toList();
   }
 
-  static List<ListItem> mapProductsToListItems(List<Map<String, dynamic>> products) {
+  static List<ListItem> mapProductsToListItems(
+    List<Map<String, dynamic>> products,
+  ) {
     return products.map((product) {
       return ListItem(
         id: product['id'],
@@ -215,10 +208,7 @@ class DryPrincipleExerciseApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
-      home: DryPrincipleScreen(
-        users: users,
-        products: products,
-      ),
+      home: DryPrincipleScreen(users: users, products: products),
     );
   }
 }

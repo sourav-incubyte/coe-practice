@@ -30,7 +30,7 @@ class StatePersistenceScreen extends StatefulWidget {
 class _StatePersistenceScreenState extends State<StatePersistenceScreen> {
   final _nameController = TextEditingController();
   final _countController = TextEditingController();
-  
+
   String _savedName = '';
   int _savedCount = 0;
   bool _isLoading = true;
@@ -61,9 +61,9 @@ class _StatePersistenceScreenState extends State<StatePersistenceScreen> {
       _savedName = _nameController.text;
       _savedCount = int.tryParse(_countController.text) ?? 0;
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('State saved!')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('State saved!')));
   }
 
   Future<void> _clearState() async {
@@ -75,9 +75,9 @@ class _StatePersistenceScreenState extends State<StatePersistenceScreen> {
       _nameController.clear();
       _countController.clear();
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('State cleared!')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('State cleared!')));
   }
 
   @override

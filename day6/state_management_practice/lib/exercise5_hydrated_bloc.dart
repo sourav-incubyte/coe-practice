@@ -50,17 +50,12 @@ class HydratedBlocExerciseApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // BlocProvider provides the CounterBloc to the widget tree
     // The bloc will automatically restore its state when created
-    return BlocProvider(
-      create: (_) => CounterBloc(),
-      child: CounterApp(),
-    );
+    return BlocProvider(create: (_) => CounterBloc(), child: CounterApp());
   }
 }
 
 class CounterApp extends StatelessWidget {
-  const CounterApp({
-    super.key,
-  });
+  const CounterApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,10 +68,7 @@ class CounterApp extends StatelessWidget {
         // BlocBuilder rebuilds when the CounterBloc state changes
         child: BlocBuilder<CounterBloc, int>(
           builder: (context, state) {
-            return Text(
-              'Count: $state',
-              style: const TextStyle(fontSize: 30),
-            );
+            return Text('Count: $state', style: const TextStyle(fontSize: 30));
           },
         ),
       ),

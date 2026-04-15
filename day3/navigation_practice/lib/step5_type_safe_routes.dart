@@ -9,17 +9,17 @@ import 'package:go_router/go_router.dart';
 class AppRouteData {
   final String path;
   final Map<String, String>? params;
-  
+
   const AppRouteData._(this.path, [this.params]);
-  
+
   static const home = AppRouteData._('/');
   static const settings = AppRouteData._('/settings');
   static const login = AppRouteData._('/login');
-  
-  static AppRouteData profile(String userId) => 
+
+  static AppRouteData profile(String userId) =>
       AppRouteData._('/profile/$userId', {'userId': userId});
-  
-  static AppRouteData product(String productId) => 
+
+  static AppRouteData product(String productId) =>
       AppRouteData._('/product/$productId', {'productId': productId});
 }
 
@@ -28,7 +28,7 @@ extension GoRouterExtensions on GoRouter {
   void navigateToAppRoute(AppRouteData route) {
     go(route.path);
   }
-  
+
   void pushAppRoute(AppRouteData route) {
     push(route.path);
   }
@@ -39,7 +39,7 @@ extension BuildContextExtensions on BuildContext {
   void navigateToAppRoute(AppRouteData route) {
     GoRouter.of(this).navigateToAppRoute(route);
   }
-  
+
   void pushAppRoute(AppRouteData route) {
     GoRouter.of(this).pushAppRoute(route);
   }
@@ -60,23 +60,20 @@ class HomeScreen extends StatelessWidget {
             const Text('Type-Safe Routes Demo'),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () => context.navigateToAppRoute(
-                AppRouteData.profile('123'),
-              ),
+              onPressed: () =>
+                  context.navigateToAppRoute(AppRouteData.profile('123')),
               child: const Text('Go to Profile 123'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () => context.navigateToAppRoute(
-                AppRouteData.product('abc123'),
-              ),
+              onPressed: () =>
+                  context.navigateToAppRoute(AppRouteData.product('abc123')),
               child: const Text('Go to Product abc123'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () => context.navigateToAppRoute(
-                AppRouteData.settings,
-              ),
+              onPressed: () =>
+                  context.navigateToAppRoute(AppRouteData.settings),
               child: const Text('Go to Settings'),
             ),
           ],
@@ -88,7 +85,7 @@ class HomeScreen extends StatelessWidget {
 
 class ProfileScreen extends StatelessWidget {
   final String userId;
-  
+
   const ProfileScreen({required this.userId, super.key});
 
   @override
@@ -114,7 +111,7 @@ class ProfileScreen extends StatelessWidget {
 
 class ProductScreen extends StatelessWidget {
   final String productId;
-  
+
   const ProductScreen({required this.productId, super.key});
 
   @override
@@ -171,7 +168,7 @@ final typeSafeGoRouter = GoRouter(
       path: AppRouteData.home.path,
       builder: (context, state) => const HomeScreen(),
     ),
-    
+
     // Profile route with parameter
     GoRoute(
       path: '/profile/:userId',
@@ -180,7 +177,7 @@ final typeSafeGoRouter = GoRouter(
         return ProfileScreen(userId: userId);
       },
     ),
-    
+
     // Product route with parameter
     GoRoute(
       path: '/product/:productId',
@@ -189,7 +186,7 @@ final typeSafeGoRouter = GoRouter(
         return ProductScreen(productId: productId);
       },
     ),
-    
+
     // Settings route
     GoRoute(
       path: AppRouteData.settings.path,

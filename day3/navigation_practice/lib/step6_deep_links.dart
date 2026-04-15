@@ -19,7 +19,7 @@ class DeepLinkHandler {
     print('Host: ${uri.host}');
     print('Path: ${uri.path}');
     print('Query Parameters: ${uri.queryParameters}');
-    
+
     // Handle different deep link types
     switch (uri.path) {
       case '/share/profile':
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
 
 class ProfileScreen extends StatelessWidget {
   final String userId;
-  
+
   const ProfileScreen({required this.userId, super.key});
 
   @override
@@ -104,7 +104,7 @@ class ProfileScreen extends StatelessWidget {
 
 class ProductScreen extends StatelessWidget {
   final String productId;
-  
+
   const ProductScreen({required this.productId, super.key});
 
   @override
@@ -133,7 +133,7 @@ class ProductScreen extends StatelessWidget {
 class ShareScreen extends StatelessWidget {
   final String type;
   final String id;
-  
+
   const ShareScreen({required this.type, required this.id, super.key});
 
   @override
@@ -142,7 +142,7 @@ class ShareScreen extends StatelessWidget {
       appBar: AppBar(title: Text('Share $type')),
       body: Center(
         child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Sharing $type with ID: $id'),
             const SizedBox(height: 20),
@@ -162,11 +162,8 @@ final deepLinkGoRouter = GoRouter(
   initialLocation: '/',
   routes: [
     // Home route
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const HomeScreen(),
-    ),
-    
+    GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
+
     // Profile route - supports deep links
     GoRoute(
       path: DeepLinkRoutes.profile,
@@ -175,7 +172,7 @@ final deepLinkGoRouter = GoRouter(
         return ProfileScreen(userId: userId);
       },
     ),
-    
+
     // Product route - supports deep links
     GoRoute(
       path: DeepLinkRoutes.product,
@@ -184,7 +181,7 @@ final deepLinkGoRouter = GoRouter(
         return ProductScreen(productId: productId);
       },
     ),
-    
+
     // Share route - supports deep links
     GoRoute(
       path: DeepLinkRoutes.share,

@@ -50,7 +50,7 @@ class TestHomeScreen extends StatelessWidget {
 
 class TestProfileScreen extends StatelessWidget {
   final String userId;
-  
+
   const TestProfileScreen({required this.userId, super.key});
 
   @override
@@ -104,10 +104,7 @@ class TestSettingsScreen extends StatelessWidget {
 final testGoRouter = GoRouter(
   initialLocation: '/',
   routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const TestHomeScreen(),
-    ),
+    GoRoute(path: '/', builder: (context, state) => const TestHomeScreen()),
     GoRoute(
       path: '/profile/:userId',
       builder: (context, state) {
@@ -128,7 +125,7 @@ void main() {
     testWidgets('Home screen displays correctly', (WidgetTester tester) async {
       // Build the app
       await tester.pumpWidget(const TestApp());
-      
+
       // Verify home screen is displayed
       expect(find.text('Navigation Testing'), findsOneWidget);
       expect(find.text('Test Home'), findsOneWidget);
@@ -138,11 +135,11 @@ void main() {
 
     testWidgets('Navigate to profile screen', (WidgetTester tester) async {
       await tester.pumpWidget(const TestApp());
-      
+
       // Tap profile button
       await tester.tap(find.byKey(const Key('profile_button')));
       await tester.pumpAndSettle();
-      
+
       // Verify profile screen is displayed
       expect(find.text('Profile 123'), findsOneWidget);
       expect(find.byKey(const Key('back_button')), findsOneWidget);
@@ -151,45 +148,51 @@ void main() {
 
     testWidgets('Navigate to settings screen', (WidgetTester tester) async {
       await tester.pumpWidget(const TestApp());
-      
+
       // Tap settings button
       await tester.tap(find.byKey(const Key('settings_button')));
       await tester.pumpAndSettle();
-      
+
       // Verify settings screen is displayed
       expect(find.text('Settings'), findsOneWidget);
       expect(find.byKey(const Key('home_button')), findsOneWidget);
       expect(find.text('Settings Screen'), findsOneWidget);
     });
 
-    testWidgets('Navigate back from profile to home', (WidgetTester tester) async {
+    testWidgets('Navigate back from profile to home', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const TestApp());
-      
+
       // Navigate to profile first
       await tester.tap(find.byKey(const Key('profile_button')));
       await tester.pumpAndSettle();
-      
+
       // Verify profile screen
       expect(find.text('Profile 123'), findsOneWidget);
-      
+
       // Tap back button
       await tester.tap(find.byKey(const Key('back_button')));
       await tester.pumpAndSettle();
-      
+
       // Verify back to home
       expect(find.text('Navigation Testing'), findsOneWidget);
       expect(find.byKey(const Key('profile_button')), findsOneWidget);
     });
 
-    testWidgets('Navigate with different user IDs', (WidgetTester tester) async {
+    testWidgets('Navigate with different user IDs', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const TestApp());
-      
+
       // Navigate to different profiles
       for (final userId in ['123', '456', '789']) {
         // Use go_router directly for testing
-        GoRouter.of(tester.element(find.byType(TestApp))).go('/profile/$userId');
+        GoRouter.of(
+          tester.element(find.byType(TestApp)),
+        ).go('/profile/$userId');
         await tester.pumpAndSettle();
-        
+
         // Verify correct profile
         expect(find.text('Profile $userId'), findsOneWidget);
         expect(find.text('Profile ID: $userId'), findsOneWidget);
@@ -198,77 +201,85 @@ void main() {
 
     testWidgets('URL changes correctly', (WidgetTester tester) async {
       await tester.pumpWidget(const TestApp());
-      
+
       // Get router
       final router = GoRouter.of(tester.element(find.byType(TestApp)));
-      
+
       // Initial URL
       expect(router.routeInformationProvider.value.location, equals('/'));
-      
+
       // Navigate to profile
       await tester.tap(find.byKey(const Key('profile_button')));
       await tester.pumpAndSettle();
-      
+
       // URL should be updated
-      expect(router.routeInformationProvider.value.location, equals('/profile/123'));
-      
+      expect(
+        router.routeInformationProvider.value.location,
+        equals('/profile/123'),
+      );
+
       // Navigate to settings
       await tester.tap(find.byKey(const Key('settings_button')));
       await tester.pumpAndSettle();
-      
+
       // URL should be updated
-      expect(router.routeInformationProvider.value.location, equals('/settings'));
+      expect(
+        router.routeInformationProvider.value.location,
+        equals('/settings'),
+      );
     });
   });
 
   group('Navigation Edge Cases', () {
     testWidgets('Handle invalid route gracefully', (WidgetTester tester) async {
       await tester.pumpWidget(const TestApp());
-      
+
       // Try to navigate to invalid route
       GoRouter.of(tester.element(find.byType(TestApp))).go('/invalid-route');
       await tester.pumpAndSettle();
-      
+
       // Should stay on current route (home)
       expect(find.text('Navigation Testing'), findsOneWidget);
     });
 
     testWidgets('Handle back button correctly', (WidgetTester tester) async {
       await tester.pumpWidget(const TestApp());
-      
+
       // Navigate to profile
       await tester.tap(find.byKey(const Key('profile_button')));
       await tester.pumpAndSettle();
-      
+
       expect(find.text('Profile 123'), findsOneWidget);
-      
+
       // Simulate back button
       await tester.pageBack();
       await tester.pumpAndSettle();
-      
+
       // Should go back to home
       expect(find.text('Navigation Testing'), findsOneWidget);
     });
   });
 
   group('Navigation Performance', () {
-    testWidgets('Navigation completes within reasonable time', (WidgetTester tester) async {
+    testWidgets('Navigation completes within reasonable time', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const TestApp());
-      
+
       final stopwatch = Stopwatch()..start();
-      
+
       // Navigate multiple routes
       await tester.tap(find.byKey(const Key('profile_button')));
       await tester.pumpAndSettle();
-      
+
       await tester.tap(find.byKey(const Key('back_button')));
       await tester.pumpAndSettle();
-      
+
       await tester.tap(find.byKey(const Key('settings_button')));
       await tester.pumpAndSettle();
-      
+
       stopwatch.stop();
-      
+
       // Navigation should complete quickly
       expect(stopwatch.elapsedMilliseconds, lessThan(1000));
     });

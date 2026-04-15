@@ -117,10 +117,7 @@ class ErrorFallbackWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           if (onRetry != null)
-            ElevatedButton(
-              onPressed: onRetry,
-              child: const Text('Retry'),
-            ),
+            ElevatedButton(onPressed: onRetry, child: const Text('Retry')),
         ],
       ),
     );
@@ -133,11 +130,7 @@ class SafeBuilder extends StatelessWidget {
   final Widget Function() builder;
   final Widget Function(Object error)? fallback;
 
-  const SafeBuilder({
-    super.key,
-    required this.builder,
-    this.fallback,
-  });
+  const SafeBuilder({super.key, required this.builder, this.fallback});
 
   @override
   Widget build(BuildContext context) {
@@ -289,7 +282,8 @@ class _ErrorBoundaryScreenState extends State<ErrorBoundaryScreen> {
               children: [
                 Switch(
                   value: _widget1ShouldFail,
-                  onChanged: (value) => setState(() => _widget1ShouldFail = value),
+                  onChanged: (value) =>
+                      setState(() => _widget1ShouldFail = value),
                 ),
                 const SizedBox(width: 8),
                 const Text('Trigger Error'),
@@ -317,7 +311,8 @@ class _ErrorBoundaryScreenState extends State<ErrorBoundaryScreen> {
               children: [
                 Switch(
                   value: _widget2ShouldFail,
-                  onChanged: (value) => setState(() => _widget2ShouldFail = value),
+                  onChanged: (value) =>
+                      setState(() => _widget2ShouldFail = value),
                 ),
                 const SizedBox(width: 8),
                 const Text('Trigger Error'),
@@ -340,10 +335,22 @@ class _ErrorBoundaryScreenState extends State<ErrorBoundaryScreen> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            _buildBenefitCard('Prevent App Crashes', 'Isolate errors to specific widget trees'),
-            _buildBenefitCard('User-Friendly Errors', 'Show custom error messages instead of red screen'),
-            _buildBenefitCard('Graceful Degradation', 'Show fallback UI when errors occur'),
-            _buildBenefitCard('Error Recovery', 'Allow users to retry failed operations'),
+            _buildBenefitCard(
+              'Prevent App Crashes',
+              'Isolate errors to specific widget trees',
+            ),
+            _buildBenefitCard(
+              'User-Friendly Errors',
+              'Show custom error messages instead of red screen',
+            ),
+            _buildBenefitCard(
+              'Graceful Degradation',
+              'Show fallback UI when errors occur',
+            ),
+            _buildBenefitCard(
+              'Error Recovery',
+              'Allow users to retry failed operations',
+            ),
             const SizedBox(height: 30),
             const Divider(),
             const SizedBox(height: 20),
@@ -352,10 +359,22 @@ class _ErrorBoundaryScreenState extends State<ErrorBoundaryScreen> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            _buildUseCaseCard('Third-party widgets', 'Wrap widgets you don\'t control'),
-            _buildUseCaseCard('Complex computations', 'Isolate heavy calculations'),
-            _buildUseCaseCard('Async operations', 'Handle network requests safely'),
-            _buildUseCaseCard('Feature toggles', 'Gracefully handle missing features'),
+            _buildUseCaseCard(
+              'Third-party widgets',
+              'Wrap widgets you don\'t control',
+            ),
+            _buildUseCaseCard(
+              'Complex computations',
+              'Isolate heavy calculations',
+            ),
+            _buildUseCaseCard(
+              'Async operations',
+              'Handle network requests safely',
+            ),
+            _buildUseCaseCard(
+              'Feature toggles',
+              'Gracefully handle missing features',
+            ),
           ],
         ),
       ),

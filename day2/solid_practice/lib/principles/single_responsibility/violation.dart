@@ -39,10 +39,10 @@ class UserProfileWidget {
 
   // VIOLATION: Data validation
   bool validateUser() {
-    return userName != null && 
-           userName!.isNotEmpty && 
-           userEmail != null && 
-           userEmail!.contains('@');
+    return userName != null &&
+        userName!.isNotEmpty &&
+        userEmail != null &&
+        userEmail!.contains('@');
   }
 
   // VIOLATION: Data formatting

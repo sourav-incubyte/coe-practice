@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class OriginalApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Original App (1.0)',
-      home: OriginalHomeScreen(),
-    );
+    return MaterialApp(title: 'Original App (1.0)', home: OriginalHomeScreen());
   }
 }
 
@@ -29,7 +26,9 @@ class OriginalHomeScreen extends StatelessWidget {
                 // 1.0 WAY: Direct widget push
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OriginalProfileScreen(userId: '123')),
+                  MaterialPageRoute(
+                    builder: (context) => OriginalProfileScreen(userId: '123'),
+                  ),
                 );
               },
               child: Text('View Profile (1.0)'),
@@ -40,7 +39,9 @@ class OriginalHomeScreen extends StatelessWidget {
                 // 1.0 WAY: Direct widget push
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OriginalSettingsScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => OriginalSettingsScreen(),
+                  ),
                 );
               },
               child: Text('Settings (1.0)'),
@@ -54,9 +55,9 @@ class OriginalHomeScreen extends StatelessWidget {
 
 class OriginalProfileScreen extends StatelessWidget {
   final String userId;
-  
+
   const OriginalProfileScreen({required this.userId});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,10 +156,7 @@ class MigratedHomeScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // 2.0 WAY: Named navigation with parameters
-                Navigator.pushNamed(
-                  context,
-                  '${AppRoutes.profile}?id=123',
-                );
+                Navigator.pushNamed(context, '${AppRoutes.profile}?id=123');
               },
               child: Text('View Profile (2.0)'),
             ),
@@ -179,9 +177,9 @@ class MigratedHomeScreen extends StatelessWidget {
 
 class MigratedProfileScreen extends StatelessWidget {
   final String userId;
-  
+
   const MigratedProfileScreen({this.userId = 'unknown'});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
