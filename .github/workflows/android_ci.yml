@@ -29,9 +29,15 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1'
-          bundler-cache: true
+          ruby-version: '3.2'
+          bundler-cache: false
           working-directory: day8/my_practice_app/android
+
+      - name: Install bundler and gems
+        working-directory: day8/my_practice_app/android
+        run: |
+          gem install bundler
+          bundle install
 
       - name: Flutter dependencies
         working-directory: day8/my_practice_app
