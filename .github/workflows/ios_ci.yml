@@ -1,0 +1,42 @@
+name: iOS CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ios-build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: false
+          working-directory: day8/my_practice_app/ios
+
+      - name: Install bundler and gems
+        working-directory: day8/my_practice_app/ios
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Flutter dependencies
+        working-directory: day8/my_practice_app
+        run: flutter pub get
+
+      - name: Run Fastlane CI
+        working-directory: day8/my_practice_app/ios
+        run: bundle exec fastlane ci
