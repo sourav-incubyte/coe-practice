@@ -1,0 +1,10 @@
+name: coe_practice
+description: COE Practice Monorepo
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ^3.11.0
+
+dev_dependencies:
+  melos: ^6.0.0

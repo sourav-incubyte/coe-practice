@@ -1,0 +1,83 @@
+name: coe_practice
+
+packages:
+  - day2/**
+  - day3/**
+  - day4/**
+  - day5/**
+  - day6/**
+  - day7/**
+  - day8/**
+
+command:
+  bootstrap:
+    runPubGetInParallel: false
+
+  clean:
+    hooks:
+      post: |
+        melos run clean
+
+  format:
+    runPubGetInParallel: false
+    exec:
+      format: dart format .
+
+  analyze:
+    runPubGetInParallel: false
+    exec:
+      analyze: dart analyze .
+
+  test:
+    runPubGetInParallel: false
+    exec:
+      test: flutter test
+
+scripts:
+  get:
+    run: melos exec -- flutter pub get
+    description: Run flutter pub get in all packages
+
+  clean:
+    run: melos exec -- flutter clean
+    description: Run flutter clean in all packages
+
+  format:
+    run: melos exec -- dart format .
+    description: Format code in all packages
+
+  analyze:
+    run: melos exec -- dart analyze
+    description: Analyze code in all packages
+
+  test:
+    run: melos exec -- flutter test
+    description: Run tests in all packages
+
+  test:day2:
+    run: melos exec --scope="day2/**" flutter test
+    description: Run tests for day2
+
+  test:day3:
+    run: melos exec --scope="day3/**" flutter test
+    description: Run tests for day3
+
+  test:day4:
+    run: melos exec --scope="day4/**" flutter test
+    description: Run tests for day4
+
+  test:day5:
+    run: melos exec --scope="day5/**" flutter test
+    description: Run tests for day5
+
+  test:day6:
+    run: melos exec --scope="day6/**" flutter test
+    description: Run tests for day6
+
+  test:day7:
+    run: melos exec --scope="day7/**" flutter test
+    description: Run tests for day7
+
+  test:day8:
+    run: melos exec --scope="day8/**" flutter test
+    description: Run tests for day8
