@@ -97,4 +97,81 @@ platform :ios do
     puts "    In real setup, use: upload_to_app_store() or pilot()"
   end
 
+  # ─── Environment-Specific Builds ─────────────────────
+  desc "Build dev environment iOS"
+  lane :build_dev do
+    flutter_cmd = find_flutter
+    raise "Flutter not found" if flutter_cmd.nil?
+
+    puts "🔍 Building DEV environment"
+
+    Dir.chdir("../../") do
+      begin
+        sh("#{flutter_cmd} build ios --release --no-codesign --dart-define=ENV=dev --dart-define=API_URL=https://dev-api.example.com")
+      rescue => e
+        puts "⚠️  iOS build failed: #{e.message}"
+        puts "   iOS platform may not be configured for this Flutter project"
+        return
+      end
+    end
+    puts "✅ Dev iOS built!"
+  end
+
+  desc "Build staging environment iOS"
+  lane :build_staging do
+    flutter_cmd = find_flutter
+    raise "Flutter not found" if flutter_cmd.nil?
+
+    puts "🔍 Building STAGING environment"
+
+    Dir.chdir("../../") do
+      begin
+        sh("#{flutter_cmd} build ios --release --no-codesign --dart-define=ENV=staging --dart-define=API_URL=https://staging-api.example.com")
+      rescue => e
+        puts "⚠️  iOS build failed: #{e.message}"
+        puts "   iOS platform may not be configured for this Flutter project"
+        return
+      end
+    end
+    puts "✅ Staging iOS built!"
+  end
+
+  desc "Build production environment iOS"
+  lane :build_prod do
+    flutter_cmd = find_flutter
+    raise "Flutter not found" if flutter_cmd.nil?
+
+    puts "🔍 Building PRODUCTION environment"
+
+    Dir.chdir("../../") do
+      begin
+        sh("#{flutter_cmd} build ios --release --no-codesign --dart-define=ENV=prod --dart-define=API_URL=https://api.example.com")
+      rescue => e
+        puts "⚠️  iOS build failed: #{e.message}"
+        puts "   iOS platform may not be configured for this Flutter project"
+        return
+      end
+    end
+    puts "✅ Production iOS built!"
+  end
+
+  # ─── Environment Deploy Lanes ────────────────────────
+  desc "Deploy dev to TestFlight"
+  lane :deploy_dev do
+    build_dev
+    puts "🚀 [SIMULATED] Would upload DEV to TestFlight"
+  end
+
+  desc "Deploy staging to TestFlight"
+  lane :deploy_staging do
+    build_staging
+    puts "🚀 [SIMULATED] Would upload STAGING to TestFlight"
+  end
+
+  desc "Deploy production to App Store"
+  lane :deploy_prod do
+    build_prod
+    puts "🚀 [SIMULATED] Would upload PRODUCTION to App Store"
+  end
+
 end

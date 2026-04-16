@@ -103,4 +103,63 @@ platform :android do
     puts "    In real setup, use: upload_to_play_store()"
   end
 
+  # ─── Environment-Specific Builds ─────────────────────
+  desc "Build dev environment APK"
+  lane :build_dev do
+    flutter_cmd = find_flutter
+    raise "Flutter not found" if flutter_cmd.nil?
+
+    puts "🔍 Building DEV environment"
+
+    Dir.chdir("../../") do
+      sh("#{flutter_cmd} build apk --release --dart-define=ENV=dev --dart-define=API_URL=https://dev-api.example.com")
+    end
+    puts "✅ Dev APK built!"
+  end
+
+  desc "Build staging environment APK"
+  lane :build_staging do
+    flutter_cmd = find_flutter
+    raise "Flutter not found" if flutter_cmd.nil?
+
+    puts "🔍 Building STAGING environment"
+
+    Dir.chdir("../../") do
+      sh("#{flutter_cmd} build apk --release --dart-define=ENV=staging --dart-define=API_URL=https://staging-api.example.com")
+    end
+    puts "✅ Staging APK built!"
+  end
+
+  desc "Build production environment APK"
+  lane :build_prod do
+    flutter_cmd = find_flutter
+    raise "Flutter not found" if flutter_cmd.nil?
+
+    puts "🔍 Building PRODUCTION environment"
+
+    Dir.chdir("../../") do
+      sh("#{flutter_cmd} build apk --release --dart-define=ENV=prod --dart-define=API_URL=https://api.example.com")
+    end
+    puts "✅ Production APK built!"
+  end
+
+  # ─── Environment Deploy Lanes ────────────────────────
+  desc "Deploy dev to Play Store internal track"
+  lane :deploy_dev do
+    build_dev
+    puts "🚀 [SIMULATED] Would upload DEV to Play Store internal track"
+  end
+
+  desc "Deploy staging to Play Store internal track"
+  lane :deploy_staging do
+    build_staging
+    puts "🚀 [SIMULATED] Would upload STAGING to Play Store internal track"
+  end
+
+  desc "Deploy production to Play Store production"
+  lane :deploy_prod do
+    build_prod
+    puts "🚀 [SIMULATED] Would upload PRODUCTION to Play Store production"
+  end
+
 end
