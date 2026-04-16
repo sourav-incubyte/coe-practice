@@ -1,0 +1,3 @@
+app_identifier("com.example.mypracticeapp")
+apple_id("dummy@example.com")       # Dummy for practice
+team_id("XXXXXXXXXX")               # Dummy Team ID

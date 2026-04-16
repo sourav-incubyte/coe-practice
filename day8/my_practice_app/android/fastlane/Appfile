@@ -1,0 +1,4 @@
+# android/fastlane/Appfile
+
+json_key_file("")         # Leave empty for practice
+package_name("com.example.mypracticeapp")

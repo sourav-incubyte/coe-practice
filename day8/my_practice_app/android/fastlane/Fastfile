@@ -1,0 +1,106 @@
+# android/fastlane/Fastfile
+
+# Find Flutter SDK - check FVM first, then common locations
+def find_flutter
+  # Check if FVM is available
+  fvm_path = `which fvm`.strip
+  if !fvm_path.empty?
+    return "fvm flutter"
+  end
+  
+  # Check for Flutter in PATH
+  flutter_path = `which flutter`.strip
+  if !flutter_path.empty?
+    return flutter_path
+  end
+  
+  # Check common installation locations
+  common_paths = [
+    ENV['FLUTTER_HOME'],
+    '/usr/local/flutter/bin/flutter',
+    '/opt/homebrew/bin/flutter',
+    '/Users/$HOME/development/flutter/bin/flutter',
+    '/Users/$HOME/fvm/default/bin/flutter'
+  ].compact
+  
+  common_paths.each do |path|
+    if File.exist?(path.gsub('$HOME', ENV['HOME'] || '~'))
+      return path.gsub('$HOME', ENV['HOME'] || '~')
+    end
+  end
+  
+  nil
+end
+
+# Add Flutter to PATH for all lanes
+ENV['PATH'] = "/usr/local/bin:/opt/homebrew/bin:/usr/local/flutter/bin:#{ENV['PATH']}"
+
+default_platform(:android)
+
+platform :android do
+
+  # ─── Build & Test Lane ───────────────────────────────
+  desc "Run Flutter tests"
+  lane :test do
+    flutter_cmd = find_flutter
+    if flutter_cmd.nil?
+      puts "⚠️  Flutter not found. Please install Flutter or FVM"
+      puts "   FVM: https://fvm.app"
+      raise "Flutter not found"
+    end
+    
+    puts "🔍 Using Flutter: #{flutter_cmd}"
+    
+    Dir.chdir("../../") do
+      sh("#{flutter_cmd} test")
+    end
+  end
+
+  # ─── Build APK Lane ──────────────────────────────────
+  desc "Build a debug APK"
+  lane :build_debug do
+    flutter_cmd = find_flutter
+    if flutter_cmd.nil?
+      raise "Flutter not found"
+    end
+    
+    puts "🔍 Using Flutter: #{flutter_cmd}"
+    
+    Dir.chdir("../../") do
+      sh("#{flutter_cmd} build apk --debug")
+    end
+    puts "✅ Debug APK built at build/app/outputs/flutter-apk/app-debug.apk"
+  end
+
+  # ─── Build Release APK ───────────────────────────────
+  desc "Build a release APK"
+  lane :build_release do
+    flutter_cmd = find_flutter
+    if flutter_cmd.nil?
+      raise "Flutter not found"
+    end
+    
+    puts "🔍 Using Flutter: #{flutter_cmd}"
+    
+    Dir.chdir("../../") do
+      sh("#{flutter_cmd} build apk --release")
+    end
+    puts "✅ Release APK built!"
+  end
+
+  # ─── Full CI Pipeline ────────────────────────────────
+  desc "Run tests + build"
+  lane :ci do
+    test
+    build_debug
+  end
+
+  # ─── (Simulated) Deploy Lane ─────────────────────────
+  desc "Simulate deploy to Play Store (no real upload)"
+  lane :deploy do
+    build_release
+    puts "🚀 [SIMULATED] Would upload to Play Store here"
+    puts "    In real setup, use: upload_to_play_store()"
+  end
+
+end

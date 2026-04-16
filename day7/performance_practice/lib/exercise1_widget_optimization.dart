@@ -28,7 +28,8 @@ class WidgetOptimizationScreen extends StatefulWidget {
   const WidgetOptimizationScreen({super.key});
 
   @override
-  State<WidgetOptimizationScreen> createState() => _WidgetOptimizationScreenState();
+  State<WidgetOptimizationScreen> createState() =>
+      _WidgetOptimizationScreenState();
 }
 
 class _WidgetOptimizationScreenState extends State<WidgetOptimizationScreen> {
@@ -57,26 +58,35 @@ class _WidgetOptimizationScreenState extends State<WidgetOptimizationScreen> {
               elevation: 0,
               color: const Color(0xFFEEEDFE),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    vertical: 20, horizontal: 24),
-                child: Column(children: [
-                  const Text('Parent rebuild count',
-                      style: TextStyle(
-                          fontSize: 13, color: Color(0xFF534AB7))),
-                  const SizedBox(height: 4),
-                  Text('$_counter',
+                  vertical: 20,
+                  horizontal: 24,
+                ),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Parent rebuild count',
+                      style: TextStyle(fontSize: 13, color: Color(0xFF534AB7)),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '$_counter',
                       style: const TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF3C3489))),
-                  const SizedBox(height: 4),
-                  const Text(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF3C3489),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    const Text(
                       'Press the button → triggers setState on this page',
-                      style: TextStyle(
-                          fontSize: 12, color: Color(0xFF534AB7))),
-                ]),
+                      style: TextStyle(fontSize: 12, color: Color(0xFF534AB7)),
+                    ),
+                  ],
+                ),
               ),
             ),
 
@@ -116,18 +126,20 @@ class _WidgetOptimizationScreenState extends State<WidgetOptimizationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Why?',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF0F6E56))),
+                    Text(
+                      'Why?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF0F6E56),
+                      ),
+                    ),
                     SizedBox(height: 6),
                     Text(
                       'Flutter caches const widgets at compile-time. '
                       'When the parent calls setState(), Flutter\'s element '
                       'tree skips any subtree whose root is a const widget — '
                       'it is the exact same object in memory, so no diff is needed.',
-                      style: TextStyle(
-                          fontSize: 13, color: Color(0xFF085041)),
+                      style: TextStyle(fontSize: 13, color: Color(0xFF085041)),
                     ),
                   ],
                 ),
@@ -157,10 +169,11 @@ class _BuildCard extends StatelessWidget {
   final String sublabel;
   final bool useConst;
 
-  const _BuildCard(
-      {required this.label,
-      required this.sublabel,
-      required this.useConst});
+  const _BuildCard({
+    required this.label,
+    required this.sublabel,
+    required this.useConst,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -169,16 +182,17 @@ class _BuildCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
           decoration: BoxDecoration(
-            color: useConst
-                ? const Color(0xFF5248C8)
-                : const Color(0xFFD85A30),
+            color: useConst ? const Color(0xFF5248C8) : const Color(0xFFD85A30),
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Text(label,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500)),
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
         ),
         const SizedBox(height: 8),
         useConst ? const ConstBox() : NonConstBox(),
@@ -245,18 +259,25 @@ class _BoxFrame extends StatelessWidget {
         border: Border.all(color: borderColor, width: 1.5),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Column(children: [
-        Icon(icon, color: borderColor, size: 28),
-        const SizedBox(height: 8),
-        Text('build() called',
-            style: TextStyle(fontSize: 12, color: textColor)),
-        const SizedBox(height: 4),
-        Text('$buildCount ×',
+      child: Column(
+        children: [
+          Icon(icon, color: borderColor, size: 28),
+          const SizedBox(height: 8),
+          Text(
+            'build() called',
+            style: TextStyle(fontSize: 12, color: textColor),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            '$buildCount ×',
             style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: textColor)),
-      ]),
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

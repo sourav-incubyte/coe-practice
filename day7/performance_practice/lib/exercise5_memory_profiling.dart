@@ -22,10 +22,7 @@ class MemoryProfilingExerciseApp extends StatelessWidget {
     return MaterialApp(
       title: 'Memory Profiling Exercise',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorSchemeSeed: Colors.indigo,
-        useMaterial3: true,
-      ),
+      theme: ThemeData(colorSchemeSeed: Colors.indigo, useMaterial3: true),
       home: const MemoryProfilingScreen(),
     );
   }
@@ -66,15 +63,18 @@ class _MemoryProfilingScreenState extends State<MemoryProfilingScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Text('How to observe the leak:',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(
+                      'How to observe the leak:',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     SizedBox(height: 4),
                     Text(
-                        '1. Press "Add Leaky Widget" → watch red ticks in log.\n'
-                        '2. Press "Remove Leaky Widget" → red ticks KEEP coming! (leak)\n'
-                        '3. Press "Add Fixed Widget" → watch green ticks.\n'
-                        '4. Press "Remove Fixed Widget" → green ticks STOP. (correct)',
-                        style: TextStyle(fontSize: 13)),
+                      '1. Press "Add Leaky Widget" → watch red ticks in log.\n'
+                      '2. Press "Remove Leaky Widget" → red ticks KEEP coming! (leak)\n'
+                      '3. Press "Add Fixed Widget" → watch green ticks.\n'
+                      '4. Press "Remove Fixed Widget" → green ticks STOP. (correct)',
+                      style: TextStyle(fontSize: 13),
+                    ),
                   ],
                 ),
               ),
@@ -87,16 +87,16 @@ class _MemoryProfilingScreenState extends State<MemoryProfilingScreen> {
                 Expanded(
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          _showLeaky ? Colors.red.shade100 : Colors.red.shade400,
+                      backgroundColor: _showLeaky
+                          ? Colors.red.shade100
+                          : Colors.red.shade400,
                       foregroundColor: Colors.white,
                     ),
-                    onPressed: () =>
-                        setState(() => _showLeaky = !_showLeaky),
+                    onPressed: () => setState(() => _showLeaky = !_showLeaky),
                     icon: Icon(_showLeaky ? Icons.remove : Icons.add),
-                    label: Text(_showLeaky
-                        ? 'Remove Leaky Widget'
-                        : 'Add Leaky Widget'),
+                    label: Text(
+                      _showLeaky ? 'Remove Leaky Widget' : 'Add Leaky Widget',
+                    ),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -108,12 +108,11 @@ class _MemoryProfilingScreenState extends State<MemoryProfilingScreen> {
                           : Colors.green.shade600,
                       foregroundColor: Colors.white,
                     ),
-                    onPressed: () =>
-                        setState(() => _showFixed = !_showFixed),
+                    onPressed: () => setState(() => _showFixed = !_showFixed),
                     icon: Icon(_showFixed ? Icons.remove : Icons.add),
-                    label: Text(_showFixed
-                        ? 'Remove Fixed Widget'
-                        : 'Add Fixed Widget'),
+                    label: Text(
+                      _showFixed ? 'Remove Fixed Widget' : 'Add Fixed Widget',
+                    ),
                   ),
                 ),
               ],
@@ -129,7 +128,8 @@ class _MemoryProfilingScreenState extends State<MemoryProfilingScreen> {
                       ? const LeakyWidget()
                       : _EmptySlot(
                           label: 'Leaky widget slot',
-                          color: Colors.red.shade100),
+                          color: Colors.red.shade100,
+                        ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -137,7 +137,8 @@ class _MemoryProfilingScreenState extends State<MemoryProfilingScreen> {
                       ? const FixedWidget()
                       : _EmptySlot(
                           label: 'Fixed widget slot',
-                          color: Colors.green.shade100),
+                          color: Colors.green.shade100,
+                        ),
                 ),
               ],
             ),
@@ -147,9 +148,10 @@ class _MemoryProfilingScreenState extends State<MemoryProfilingScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Event Log',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 15)),
+                const Text(
+                  'Event Log',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                ),
                 TextButton.icon(
                   onPressed: () => eventLog.value = [],
                   icon: const Icon(Icons.clear_all, size: 16),
@@ -166,8 +168,10 @@ class _MemoryProfilingScreenState extends State<MemoryProfilingScreen> {
                 builder: (_, entries, __) {
                   if (entries.isEmpty) {
                     return const Center(
-                      child: Text('No events yet — add a widget above.',
-                          style: TextStyle(color: Colors.grey)),
+                      child: Text(
+                        'No events yet — add a widget above.',
+                        style: TextStyle(color: Colors.grey),
+                      ),
                     );
                   }
                   return ListView.builder(
@@ -187,8 +191,8 @@ class _MemoryProfilingScreenState extends State<MemoryProfilingScreen> {
                             color: isDispose
                                 ? Colors.orange.shade800
                                 : isLeaky
-                                    ? Colors.red.shade700
-                                    : Colors.green.shade700,
+                                ? Colors.red.shade700
+                                : Colors.green.shade700,
                           ),
                         ),
                       );
@@ -220,8 +224,10 @@ class _EmptySlot extends StatelessWidget {
         border: Border.all(color: Colors.grey.shade300),
       ),
       child: Center(
-        child: Text(label,
-            style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+        child: Text(
+          label,
+          style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
+        ),
       ),
     );
   }
@@ -266,19 +272,26 @@ class _LeakyWidgetState extends State<LeakyWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(children: [
-            const Icon(Icons.bug_report, color: Colors.red, size: 16),
-            const SizedBox(width: 6),
-            const Text('Leaky Widget',
+          Row(
+            children: [
+              const Icon(Icons.bug_report, color: Colors.red, size: 16),
+              const SizedBox(width: 6),
+              const Text(
+                'Leaky Widget',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.red)),
-          ]),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 4),
-          Text('Ticks: $_ticks',
-              style: const TextStyle(fontSize: 13)),
+          Text('Ticks: $_ticks', style: const TextStyle(fontSize: 13)),
           const SizedBox(height: 4),
-          const Text('No dispose() → timer never stops',
-              style: TextStyle(fontSize: 11, color: Colors.red)),
+          const Text(
+            'No dispose() → timer never stops',
+            style: TextStyle(fontSize: 11, color: Colors.red),
+          ),
         ],
       ),
     );
@@ -327,19 +340,26 @@ class _FixedWidgetState extends State<FixedWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(children: [
-            const Icon(Icons.check_circle, color: Colors.green, size: 16),
-            const SizedBox(width: 6),
-            const Text('Fixed Widget',
+          Row(
+            children: [
+              const Icon(Icons.check_circle, color: Colors.green, size: 16),
+              const SizedBox(width: 6),
+              const Text(
+                'Fixed Widget',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.green)),
-          ]),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 4),
-          Text('Ticks: $_ticks',
-              style: const TextStyle(fontSize: 13)),
+          Text('Ticks: $_ticks', style: const TextStyle(fontSize: 13)),
           const SizedBox(height: 4),
-          const Text('dispose() cancels timer ✓',
-              style: TextStyle(fontSize: 11, color: Colors.green)),
+          const Text(
+            'dispose() cancels timer ✓',
+            style: TextStyle(fontSize: 11, color: Colors.green),
+          ),
         ],
       ),
     );
