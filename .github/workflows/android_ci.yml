@@ -31,18 +31,19 @@ jobs:
         with:
           ruby-version: '3.1'
           bundler-cache: true
-          working-directory: android
+          working-directory: day8/my_practice_app/android
 
       - name: Flutter dependencies
+        working-directory: day8/my_practice_app
         run: flutter pub get
 
       - name: Run Fastlane CI
-        working-directory: android
+        working-directory: day8/my_practice_app/android
         run: bundle exec fastlane ci
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: debug-apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
+          path: day8/my_practice_app/build/app/outputs/flutter-apk/app-debug.apk
           retention-days: 7
