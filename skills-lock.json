@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "flutter-test-patterns": {
+      "source": "Sourav-Sonkar/flutter_test_patterns",
+      "sourceType": "github",
+      "computedHash": "13a383470f95f4af6b6956ab09fcc7de62af5e73109b975d5a153f7b8354f528"
+    }
+  }
+}
