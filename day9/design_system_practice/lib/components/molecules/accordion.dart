@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../design_tokens/colors.dart';
 import '../../design_tokens/spacing.dart';
-import '../../design_tokens/typography.dart';
 import '../../design_tokens/radius.dart';
 
 class Accordion extends StatelessWidget {
