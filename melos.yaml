@@ -8,6 +8,8 @@ packages:
   - day6/**
   - day7/**
   - day8/**
+  - day9/**
+  
 
 command:
   bootstrap:
@@ -81,3 +83,7 @@ scripts:
   test:day8:
     run: melos exec --scope="day8/**" flutter test
     description: Run tests for day8
+
+  test:day9:
+    run: melos exec --scope="day9/**" flutter test
+    description: Run tests for day9
