@@ -1,0 +1,31 @@
+appId: com.example.counter_maestro
+---
+# Example: Swipe Gestures / Navigation
+# Demonstrates: tapOn for navigation
+
+- launchApp
+- waitForAnimationToEnd
+
+# Navigate to Swipe tab using label
+- tapOn: "Swipe"
+- waitForAnimationToEnd
+
+# Assert initial item is visible
+- assertVisible: "Item 1"
+
+# Tap Next button to navigate
+- tapOn: "Next"
+- waitForAnimationToEnd
+
+# Assert second item is visible
+- assertVisible: "Item 2"
+
+# Tap Next again
+- tapOn: "Next"
+- waitForAnimationToEnd
+
+# Assert third item is visible
+- assertVisible: "Item 3"
+
+# Take screenshot
+- takeScreenshot: .maestro/screenshots/swipe_example

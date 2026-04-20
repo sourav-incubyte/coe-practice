@@ -1,0 +1,23 @@
+appId: com.example.counter_maestro
+---
+# Example: Conditional Logic
+# Demonstrates: assertVisible for checking conditions
+
+- launchApp
+- waitForAnimationToEnd
+
+# Check if counter is at 0, then increment
+- assertVisible: "0"
+- tapOn: "Increment"
+
+# Check if counter is now at 1
+- assertVisible: "1"
+
+# Decrement back to 0
+- tapOn: "Decrement"
+
+# Verify counter is back at 0
+- assertVisible: "0"
+
+# Take screenshot
+- takeScreenshot: .maestro/screenshots/conditional_example

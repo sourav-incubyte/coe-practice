@@ -1,0 +1,26 @@
+appId: com.example.counter_maestro
+---
+# Example: Text Input and Form Interactions
+# Demonstrates: tapOn, inputText
+
+- launchApp
+- waitForAnimationToEnd
+
+# Navigate to Input tab using label
+- tapOn: "Input"
+- waitForAnimationToEnd
+
+# Tap on name field and input text
+- tapOn: "Name"
+- inputText: "John Doe"
+
+# Tap on email field and input text
+- tapOn: "Email"
+- inputText: "john@example.com"
+
+# Submit the form
+- tapOn: "Submit"
+- waitForAnimationToEnd
+
+# Take screenshot
+- takeScreenshot: .maestro/screenshots/input_example

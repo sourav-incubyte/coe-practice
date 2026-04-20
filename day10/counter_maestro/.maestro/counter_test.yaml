@@ -1,0 +1,22 @@
+appId: com.example.counter_maestro
+---
+# Launch the app
+- launchApp
+- waitForAnimationToEnd
+
+# Assert initial counter value is 0
+- assertVisible: "0"
+
+# Tap Increment 3 times
+- tapOn: "Increment"
+- tapOn: "Increment"
+- tapOn: "Increment"
+
+# Tap Decrement once
+- tapOn: "Decrement"
+
+# Assert final counter value is 2
+- assertVisible: "2"
+
+# Take a screenshot
+- takeScreenshot: .maestro/screenshots/counter_after_taps

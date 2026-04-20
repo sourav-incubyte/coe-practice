@@ -1,0 +1,45 @@
+appId: com.example.counter_maestro
+---
+- launchApp
+- waitForAnimationToEnd
+
+# Navigate to Scroll tab
+- tapOn: "Scroll"
+- waitForAnimationToEnd
+
+# Use label (not text) because of Semantics wrapper
+- assertVisible:
+    label: "Item 1"
+
+# Scroll until Item 10
+- scrollUntilVisible:
+    element:
+      label: "Item 10"
+    direction: DOWN
+    timeout: 5000
+
+- assertVisible:
+    label: "Item 10"
+- takeScreenshot: .maestro/screenshots/scrolled_to_10
+
+# Scroll until Item 30
+- scrollUntilVisible:
+    element:
+      label: "Item 30"
+    direction: DOWN
+    timeout: 10000
+
+- assertVisible:
+    label: "Item 30"
+- takeScreenshot: .maestro/screenshots/scrolled_to_30
+
+# Scroll back to top
+- scrollUntilVisible:
+    element:
+      label: "Item 1"
+    direction: UP
+    timeout: 10000
+
+- assertVisible:
+    label: "Item 1"
+- takeScreenshot: .maestro/screenshots/scrolled_back_top

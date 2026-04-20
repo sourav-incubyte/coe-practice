@@ -1,0 +1,15 @@
+appId: com.example.counter_maestro
+---
+# Example: Wait Conditions
+# Demonstrates: waitForAnimationToEnd, assertVisible
+
+- launchApp
+
+# Wait for animations to complete before interacting
+- waitForAnimationToEnd
+
+# Assert counter is visible (Counter tab is default)
+- assertVisible: "0"
+
+# Take screenshot after wait
+- takeScreenshot: .maestro/screenshots/wait_example

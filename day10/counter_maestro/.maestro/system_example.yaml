@@ -1,0 +1,15 @@
+appId: com.example.counter_maestro
+---
+# Example: System Interactions
+# Demonstrates: basic interactions on Counter tab
+
+- launchApp
+- waitForAnimationToEnd
+
+# Test basic counter functionality on default tab
+- assertVisible: "0"
+- tapOn: "Increment"
+- assertVisible: "1"
+
+# Take screenshot
+- takeScreenshot: .maestro/screenshots/system_example
